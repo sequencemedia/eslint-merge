@@ -1,0 +1,48 @@
+{
+  "name": "@sequencemedia/eslint-merge",
+  "version": "0.0.0",
+  "description": "Merge configurations for ESLint 9",
+  "main": "./index.mjs",
+  "type": "module",
+  "author": {
+    "name": "Jonathan Perry for Sequence Media Limited",
+    "email": "sequencemedia@sequencemedia.net",
+    "url": "https://sequencemedia.net"
+  },
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/sequencemedia/eslint-merge.git"
+  },
+  "homepage": "https://github.com/sequencemedia/eslint-merge#readme",
+  "bugs": {
+    "url": "https://github.com/sequencemedia/eslint-merge/issues"
+  },
+  "scripts": {
+    "lint": "eslint . --ext .cjs,.mjs",
+    "lint:fix": "npm run lint -- --fix",
+    "prepare": "husky",
+    "test": "mocha test --recursive --verbose --color"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.26.0",
+    "@babel/eslint-parser": "^7.25.9",
+    "@babel/preset-env": "^7.26.0",
+    "core-js": "^3.39.0",
+    "chai": "^5.1.2",
+    "husky": "^9.1.7",
+    "mocha": "^11.0.1",
+    "eslint": "8.57.1",
+    "eslint-config-standard": "^17.1.0"
+  },
+  "imports": {
+    "#eslint-merge": "./index.mjs",
+    "#eslint-merge/merge": "./merge.mjs",
+    "#eslint-merge/merge-with": "./merge-with.mjs"
+  },
+  "exports": {
+    ".": "./index.mjs",
+    "./merge":"./merge.mjs",
+    "./merge-with": "./merge-with.mjs"
+  }
+}
