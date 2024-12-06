@@ -32,3 +32,6 @@ babel.config.*
 
 # ESLint
 eslint.config.*
+
+# Mocha
+test

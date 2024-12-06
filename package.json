@@ -42,7 +42,7 @@
   },
   "exports": {
     ".": "./index.mjs",
-    "./merge":"./merge.mjs",
+    "./merge": "./merge.mjs",
     "./merge-with": "./merge-with.mjs"
   }
 }
