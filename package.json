@@ -37,12 +37,12 @@
   },
   "imports": {
     "#eslint-merge": "./index.mjs",
-    "#eslint-merge/merge": "./merge.mjs",
-    "#eslint-merge/get-map-merge": "./get-map-merge.mjs"
+    "#eslint-merge/get-map-merge": "./get-map-merge.mjs",
+    "#eslint-merge/merge": "./merge.mjs"
   },
   "exports": {
     ".": "./index.mjs",
-    "./merge": "./merge.mjs",
-    "./get-map-merge": "./get-map-merge.mjs"
+    "./get-map-merge": "./get-map-merge.mjs",
+    "./merge": "./merge.mjs"
   }
 }
