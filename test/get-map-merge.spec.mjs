@@ -2,17 +2,23 @@ import {
   expect
 } from 'chai'
 
-import mergeWith from '#eslint-merge/merge-with'
+import getMapMerge from '@sequencemedia/eslint-merge/get-map-merge'
 
-describe('#eslint-merge/merge-with', () => {
-  describe('`mergeWith`', () => {
-    it('is a function', () => expect(mergeWith).to.be.a('function'))
+describe('@sequencemedia/eslint-merge/get-map-merge', () => {
+  describe('`getMapMerge`', () => {
+    it('is a function', () => expect(getMapMerge).to.be.a('function'))
   })
 
-  describe('`mergeWith()`', () => {
-    it('returns a function', () => expect(mergeWith()).to.be.a('function'))
+  /**
+   *  const mapMerge = getMapMerge()
+   */
+  describe('`getMapMerge()`', () => {
+    it('returns a function', () => expect(getMapMerge()).to.be.a('function'))
 
-    describe('Merge `omega` into `alpha`', () => {
+    /**
+     *  mapMerge()
+     */
+    describe('`mapMerge()`', () => {
       it('returns an object', () => {
         const ALPHA = {
           languageOptions: { alpha: 'alpha' },
@@ -28,8 +34,14 @@ describe('#eslint-merge/merge-with', () => {
           settings: { omega: 'omega' }
         }
 
+        const config = [
+          ALPHA
+        ]
+
+        const mapMerge = getMapMerge(OMEGA)
+
         return (
-          expect([ALPHA].map(mergeWith(OMEGA)))
+          expect(config.map(mapMerge))
             .to.eql([
               {
                 languageOptions: { alpha: 'alpha', omega: 'omega' },

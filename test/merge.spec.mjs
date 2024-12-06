@@ -15,9 +15,9 @@ import merge, {
   mergeLinterOptions,
   mergeRules,
   mergeSettings
-} from '#eslint-merge/merge'
+} from '@sequencemedia/eslint-merge/merge'
 
-describe('#eslint-merge/merge', () => {
+describe('@sequencemedia/eslint-merge/merge', () => {
   const MOCK_LANGUAGE_OPTIONS = {}
   const MOCK_LINTER_OPTIONS = {}
   const MOCK_RULES = {}

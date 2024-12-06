@@ -28,21 +28,21 @@
     "@babel/core": "^7.26.0",
     "@babel/eslint-parser": "^7.25.9",
     "@babel/preset-env": "^7.26.0",
-    "core-js": "^3.39.0",
     "chai": "^5.1.2",
-    "husky": "^9.1.7",
-    "mocha": "^11.0.1",
+    "core-js": "^3.39.0",
     "eslint": "8.57.1",
-    "eslint-config-standard": "^17.1.0"
+    "eslint-config-standard": "^17.1.0",
+    "husky": "^9.1.7",
+    "mocha": "^11.0.1"
   },
   "imports": {
     "#eslint-merge": "./index.mjs",
     "#eslint-merge/merge": "./merge.mjs",
-    "#eslint-merge/merge-with": "./merge-with.mjs"
+    "#eslint-merge/get-map-merge": "./get-map-merge.mjs"
   },
   "exports": {
     ".": "./index.mjs",
     "./merge": "./merge.mjs",
-    "./merge-with": "./merge-with.mjs"
+    "./get-map-merge": "./get-map-merge.mjs"
   }
 }

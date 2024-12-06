@@ -11,10 +11,10 @@ import merge, {
   mergeLinterOptions,
   mergeRules,
   mergeSettings,
-  mergeWith
-} from '#eslint-merge'
+  getMapMerge
+} from '@sequencemedia/eslint-merge'
 
-describe('#eslint-merge', () => {
+describe('@sequencemedia/eslint-merge', () => {
   describe('`merge`', () => {
     it('is a function', () => expect(merge).to.be.a('function'))
   })
@@ -51,7 +51,7 @@ describe('#eslint-merge', () => {
     it('is a function', () => expect(mergeSettings).to.be.a('function'))
   })
 
-  describe('`mergeWith`', () => {
-    it('is a function', () => expect(mergeWith).to.be.a('function'))
+  describe('`getMapMerge`', () => {
+    it('is a function', () => expect(getMapMerge).to.be.a('function'))
   })
 })

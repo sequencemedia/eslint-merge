@@ -1,5 +1,5 @@
 export { default } from './merge.mjs'
 export * from './merge.mjs'
 export {
-  default as mergeWith
-} from './merge-with.mjs'
+  default as getMapMerge
+} from './get-map-merge.mjs'
