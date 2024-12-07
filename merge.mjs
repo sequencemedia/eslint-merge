@@ -251,23 +251,23 @@ export function mergeSettings (alpha = {}, omega = {}) {
  * @param {Config} [alpha]
  * @param {Config} [omega]
  * @returns {{
- *  languageOptions: ConfigLanguageOptions
- *  linterOptions: ConfigLinterOptions
- *  processor: ConfigProcessor
- *  plugins: ConfigPlugins
- *  rules: ConfigRules
- *  settings: ConfigSettings
+ *  languageOptions?: ConfigLanguageOptions
+ *  linterOptions?: ConfigLinterOptions
+ *  processor?: ConfigProcessor
+ *  plugins?: ConfigPlugins
+ *  rules?: ConfigRules
+ *  settings?: ConfigSettings
  * }}
  */
 export default function merge (alpha = {}, omega = {}) {
   return {
     ...alpha,
     ...omega,
-    languageOptions: mergeLanguageOptions(alpha, omega),
-    linterOptions: mergeLinterOptions(alpha, omega),
-    processor: mergeProcessor(alpha, omega),
-    plugins: mergePlugins(alpha, omega),
-    rules: mergeRules(alpha, omega),
-    settings: mergeSettings(alpha, omega)
+    ...(hasLanguageOptions(alpha) || hasLanguageOptions(omega) ? { languageOptions: mergeLanguageOptions(alpha, omega) } : {}),
+    ...(hasLinterOptions(alpha) || hasLinterOptions(omega) ? { linterOptions: mergeLinterOptions(alpha, omega) } : {}),
+    ...(hasProcessor(alpha) || hasProcessor(omega) ? { processor: mergeProcessor(alpha, omega) } : {}),
+    ...(hasPlugins(alpha) || hasPlugins(omega) ? { plugins: mergePlugins(alpha, omega) } : {}),
+    ...(hasRules(alpha) || hasRules(omega) ? { rules: mergeRules(alpha, omega) } : {}),
+    ...(hasSettings(alpha) || hasSettings(omega) ? { settings: mergeSettings(alpha, omega) } : {})
   }
 }
