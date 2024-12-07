@@ -23,6 +23,7 @@ describe('@sequencemedia/eslint-merge/get-map-merge', () => {
         const ALPHA = {
           languageOptions: { alpha: 'alpha' },
           linterOptions: { alpha: 'alpha' },
+          processor: { alpha: 'alpha' },
           plugins: { alpha: 'alpha' },
           rules: { alpha: 'alpha' },
           settings: { alpha: 'alpha' }
@@ -31,6 +32,7 @@ describe('@sequencemedia/eslint-merge/get-map-merge', () => {
         const OMEGA = {
           languageOptions: { omega: 'omega' },
           linterOptions: { omega: 'omega' },
+          processor: { omega: 'omega' },
           plugins: { omega: 'omega' },
           rules: { omega: 'omega' },
           settings: { omega: 'omega' }
@@ -48,6 +50,7 @@ describe('@sequencemedia/eslint-merge/get-map-merge', () => {
               {
                 languageOptions: { alpha: 'alpha', omega: 'omega' },
                 linterOptions: { alpha: 'alpha', omega: 'omega' },
+                processor: { alpha: 'alpha', omega: 'omega' },
                 plugins: { alpha: 'alpha', omega: 'omega' },
                 rules: { alpha: 'alpha', omega: 'omega' },
                 settings: { alpha: 'alpha', omega: 'omega' }

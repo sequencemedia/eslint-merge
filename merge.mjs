@@ -188,10 +188,26 @@ export function mergeLinterOptions (alpha = {}, omega = {}) {
  * @param {Config} [omega]
  * @returns {ConfigRules}
  */
+export function mergeProcessor (alpha = {}, omega = {}) {
+  /**
+   *  There may be structures that can't be duplicated in a deep clone with `structuredClone`
+   *  but we just want to override `processor` wholesale so spread a shallow clone
+   */
+  return {
+    ...getProcessor(alpha),
+    ...getProcessor(omega)
+  }
+}
+
+/**
+ * @param {Config} [alpha]
+ * @param {Config} [omega]
+ * @returns {ConfigRules}
+ */
 export function mergePlugins (alpha = {}, omega = {}) {
   /**
    *  There may be structures that can't be duplicated in a deep clone with `structuredClone`
-   *  but we just want to override plugins wholesale so spread a shallow clone
+   *  but we just want to override `plugins` wholesale so spread a shallow clone
    */
   return {
     ...getPlugins(alpha),
@@ -237,6 +253,7 @@ export function mergeSettings (alpha = {}, omega = {}) {
  * @returns {{
  *  languageOptions: ConfigLanguageOptions
  *  linterOptions: ConfigLinterOptions
+ *  processor: ConfigProcessor
  *  plugins: ConfigPlugins
  *  rules: ConfigRules
  *  settings: ConfigSettings
@@ -248,6 +265,7 @@ export default function merge (alpha = {}, omega = {}) {
     ...omega,
     languageOptions: mergeLanguageOptions(alpha, omega),
     linterOptions: mergeLinterOptions(alpha, omega),
+    processor: mergeProcessor(alpha, omega),
     plugins: mergePlugins(alpha, omega),
     rules: mergeRules(alpha, omega),
     settings: mergeSettings(alpha, omega)

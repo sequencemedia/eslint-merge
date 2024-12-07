@@ -5,16 +5,19 @@ import {
 import merge, {
   hasLanguageOptions,
   hasLinterOptions,
+  hasProcessor,
   hasPlugins,
   hasRules,
   hasSettings,
   getLanguageOptions,
   getLinterOptions,
+  getProcessor,
   getPlugins,
   getRules,
   getSettings,
   mergeLanguageOptions,
   mergeLinterOptions,
+  mergeProcessor,
   mergePlugins,
   mergeRules,
   mergeSettings
@@ -23,6 +26,7 @@ import merge, {
 describe('@sequencemedia/eslint-merge/merge', () => {
   const MOCK_LANGUAGE_OPTIONS = {}
   const MOCK_LINTER_OPTIONS = {}
+  const MOCK_PROCESSOR = {}
   const MOCK_PLUGINS = {}
   const MOCK_RULES = {}
   const MOCK_SETTINGS = {}
@@ -37,6 +41,10 @@ describe('@sequencemedia/eslint-merge/merge', () => {
 
   describe('`hasLinterOptions`', () => {
     it('is a function', () => expect(hasLinterOptions).to.be.a('function'))
+  })
+
+  describe('`hasProcessor`', () => {
+    it('is a function', () => expect(hasProcessor).to.be.a('function'))
   })
 
   describe('`hasPlugins`', () => {
@@ -59,6 +67,10 @@ describe('@sequencemedia/eslint-merge/merge', () => {
     it('is a function', () => expect(getLinterOptions).to.be.a('function'))
   })
 
+  describe('`getProcessor`', () => {
+    it('is a function', () => expect(getProcessor).to.be.a('function'))
+  })
+
   describe('`getPlugins`', () => {
     it('is a function', () => expect(getPlugins).to.be.a('function'))
   })
@@ -77,6 +89,10 @@ describe('@sequencemedia/eslint-merge/merge', () => {
 
   describe('`mergeLinterOptions`', () => {
     it('is a function', () => expect(mergeLinterOptions).to.be.a('function'))
+  })
+
+  describe('`mergeProcessor`', () => {
+    it('is a function', () => expect(mergeProcessor).to.be.a('function'))
   })
 
   describe('`mergePlugins`', () => {
@@ -100,6 +116,9 @@ describe('@sequencemedia/eslint-merge/merge', () => {
         linterOptions: {
           alpha: 'alpha'
         },
+        processor: {
+          alpha: 'alpha'
+        },
         plugins: {
           alpha: 'alpha'
         },
@@ -116,6 +135,9 @@ describe('@sequencemedia/eslint-merge/merge', () => {
           omega: 'omega'
         },
         linterOptions: {
+          omega: 'omega'
+        },
+        processor: {
           omega: 'omega'
         },
         plugins: {
@@ -137,6 +159,10 @@ describe('@sequencemedia/eslint-merge/merge', () => {
               omega: 'omega'
             },
             linterOptions: {
+              alpha: 'alpha',
+              omega: 'omega'
+            },
+            processor: {
               alpha: 'alpha',
               omega: 'omega'
             },
@@ -184,6 +210,22 @@ describe('@sequencemedia/eslint-merge/merge', () => {
     describe('Does not have `linterOptions`', () => {
       it('returns false', () => (
         expect(hasLinterOptions({}))
+          .to.be.false
+      ))
+    })
+  })
+
+  describe('`hasProcessor()`', () => {
+    describe('Has `processor`', () => {
+      it('returns true', () => (
+        expect(hasProcessor({ processor: MOCK_PROCESSOR }))
+          .to.be.true
+      ))
+    })
+
+    describe('Does not have `processor`', () => {
+      it('returns false', () => (
+        expect(hasProcessor({}))
           .to.be.false
       ))
     })
@@ -248,6 +290,13 @@ describe('@sequencemedia/eslint-merge/merge', () => {
     it('returns an object', () => (
       expect(getLinterOptions({ linterOptions: MOCK_LINTER_OPTIONS }))
         .to.equal(MOCK_LINTER_OPTIONS)
+    ))
+  })
+
+  describe('`getProcessor()`', () => {
+    it('returns an object', () => (
+      expect(getProcessor({ processor: MOCK_PROCESSOR }))
+        .to.equal(MOCK_PROCESSOR)
     ))
   })
 
@@ -323,6 +372,13 @@ describe('@sequencemedia/eslint-merge/merge', () => {
   describe('`mergeLinterOptions()`', () => {
     it('returns an object', () => (
       expect(mergeLinterOptions({ linterOptions: { mockOption: 'alpha' } }, { linterOptions: { mockOption: 'omega' } }))
+        .to.eql({ mockOption: 'omega' })
+    ))
+  })
+
+  describe('`mergeProcessor()`', () => {
+    it('returns an object', () => (
+      expect(mergeProcessor({ processor: { mockOption: 'alpha' } }, { processor: { mockOption: 'omega' } }))
         .to.eql({ mockOption: 'omega' })
     ))
   })
