@@ -2,6 +2,7 @@
  * @typedef {Record<PropertyKey, unknown> | Record<PropertyKey, never>} ConfigLanguageOptions
  * @typedef {Record<PropertyKey, unknown> | Record<PropertyKey, never>} ConfigLinterOptions
  * @typedef {Record<PropertyKey, unknown> | Record<PropertyKey, never>} ConfigProcessor
+ * @typedef {Record<PropertyKey, unknown> | Record<PropertyKey, never>} ConfigPlugins
  * @typedef {Record<PropertyKey, unknown> | Record<PropertyKey, never>} ConfigRules
  * @typedef {Record<PropertyKey, unknown> | Record<PropertyKey, never>} ConfigSettings
  *
@@ -9,6 +10,7 @@
  * @property {ConfigLanguageOptions} [languageOptions]
  * @property {ConfigLinterOptions} [linterOptions]
  * @property {ConfigProcessor} [processor]
+ * @property {ConfigPlugins} [plugins]
  * @property {ConfigRules} [rules]
  * @property {ConfigSettings} [settings]
  */
@@ -82,6 +84,14 @@ export function hasProcessor ({ processor = null }) {
  * @param {Config} config
  * @returns {boolean}
  */
+export function hasPlugins ({ plugins = null }) {
+  return Boolean(plugins)
+}
+
+/**
+ * @param {Config} config
+ * @returns {boolean}
+ */
 export function hasRules ({ rules = null }) {
   return Boolean(rules)
 }
@@ -116,6 +126,14 @@ export function getLinterOptions ({ linterOptions = {} }) {
  */
 export function getProcessor ({ processor = {} }) {
   return processor
+}
+
+/**
+ * @param {Config} config
+ * @returns {ConfigPlugins}
+ */
+export function getPlugins ({ plugins = {} }) {
+  return plugins
 }
 
 /**
@@ -170,6 +188,22 @@ export function mergeLinterOptions (alpha = {}, omega = {}) {
  * @param {Config} [omega]
  * @returns {ConfigRules}
  */
+export function mergePlugins (alpha = {}, omega = {}) {
+  /**
+   *  There may be structures that can't be duplicated in a deep clone with `structuredClone`
+   *  but we just want to override plugins wholesale so spread a shallow clone
+   */
+  return {
+    ...getPlugins(alpha),
+    ...getPlugins(omega)
+  }
+}
+
+/**
+ * @param {Config} [alpha]
+ * @param {Config} [omega]
+ * @returns {ConfigRules}
+ */
 export function mergeRules (alpha = {}, omega = {}) {
   return (
     Object
@@ -203,6 +237,7 @@ export function mergeSettings (alpha = {}, omega = {}) {
  * @returns {{
  *  languageOptions: ConfigLanguageOptions
  *  linterOptions: ConfigLinterOptions
+ *  plugins: ConfigPlugins
  *  rules: ConfigRules
  *  settings: ConfigSettings
  * }}
@@ -213,6 +248,7 @@ export default function merge (alpha = {}, omega = {}) {
     ...omega,
     languageOptions: mergeLanguageOptions(alpha, omega),
     linterOptions: mergeLinterOptions(alpha, omega),
+    plugins: mergePlugins(alpha, omega),
     rules: mergeRules(alpha, omega),
     settings: mergeSettings(alpha, omega)
   }

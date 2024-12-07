@@ -5,14 +5,17 @@ import {
 import merge, {
   hasLanguageOptions,
   hasLinterOptions,
+  hasPlugins,
   hasRules,
   hasSettings,
   getLanguageOptions,
   getLinterOptions,
+  getPlugins,
   getRules,
   getSettings,
   mergeLanguageOptions,
   mergeLinterOptions,
+  mergePlugins,
   mergeRules,
   mergeSettings
 } from '@sequencemedia/eslint-merge/merge'
@@ -20,11 +23,32 @@ import merge, {
 describe('@sequencemedia/eslint-merge/merge', () => {
   const MOCK_LANGUAGE_OPTIONS = {}
   const MOCK_LINTER_OPTIONS = {}
+  const MOCK_PLUGINS = {}
   const MOCK_RULES = {}
   const MOCK_SETTINGS = {}
 
   describe('`merge`', () => {
     it('is a function', () => expect(merge).to.be.a('function'))
+  })
+
+  describe('`hasLanguageOptions`', () => {
+    it('is a function', () => expect(hasLanguageOptions).to.be.a('function'))
+  })
+
+  describe('`hasLinterOptions`', () => {
+    it('is a function', () => expect(hasLinterOptions).to.be.a('function'))
+  })
+
+  describe('`hasPlugins`', () => {
+    it('is a function', () => expect(hasPlugins).to.be.a('function'))
+  })
+
+  describe('`hasRules`', () => {
+    it('is a function', () => expect(hasRules).to.be.a('function'))
+  })
+
+  describe('`hasSettings`', () => {
+    it('is a function', () => expect(hasSettings).to.be.a('function'))
   })
 
   describe('`getLanguageOptions`', () => {
@@ -33,6 +57,10 @@ describe('@sequencemedia/eslint-merge/merge', () => {
 
   describe('`getLinterOptions`', () => {
     it('is a function', () => expect(getLinterOptions).to.be.a('function'))
+  })
+
+  describe('`getPlugins`', () => {
+    it('is a function', () => expect(getPlugins).to.be.a('function'))
   })
 
   describe('`getRules`', () => {
@@ -49,6 +77,10 @@ describe('@sequencemedia/eslint-merge/merge', () => {
 
   describe('`mergeLinterOptions`', () => {
     it('is a function', () => expect(mergeLinterOptions).to.be.a('function'))
+  })
+
+  describe('`mergePlugins`', () => {
+    it('is a function', () => expect(mergePlugins).to.be.a('function'))
   })
 
   describe('`mergeRules`', () => {
@@ -68,6 +100,9 @@ describe('@sequencemedia/eslint-merge/merge', () => {
         linterOptions: {
           alpha: 'alpha'
         },
+        plugins: {
+          alpha: 'alpha'
+        },
         rules: {
           alpha: 'alpha'
         },
@@ -81,6 +116,9 @@ describe('@sequencemedia/eslint-merge/merge', () => {
           omega: 'omega'
         },
         linterOptions: {
+          omega: 'omega'
+        },
+        plugins: {
           omega: 'omega'
         },
         rules: {
@@ -99,6 +137,10 @@ describe('@sequencemedia/eslint-merge/merge', () => {
               omega: 'omega'
             },
             linterOptions: {
+              alpha: 'alpha',
+              omega: 'omega'
+            },
+            plugins: {
               alpha: 'alpha',
               omega: 'omega'
             },
@@ -147,6 +189,22 @@ describe('@sequencemedia/eslint-merge/merge', () => {
     })
   })
 
+  describe('`hasPlugins()`', () => {
+    describe('Has `plugins`', () => {
+      it('returns true', () => (
+        expect(hasPlugins({ plugins: MOCK_PLUGINS }))
+          .to.be.true
+      ))
+    })
+
+    describe('Does not have `plugins`', () => {
+      it('returns false', () => (
+        expect(hasPlugins({}))
+          .to.be.false
+      ))
+    })
+  })
+
   describe('`hasRules()`', () => {
     describe('Has `rules`', () => {
       it('returns true', () => (
@@ -190,6 +248,13 @@ describe('@sequencemedia/eslint-merge/merge', () => {
     it('returns an object', () => (
       expect(getLinterOptions({ linterOptions: MOCK_LINTER_OPTIONS }))
         .to.equal(MOCK_LINTER_OPTIONS)
+    ))
+  })
+
+  describe('`getPlugins()`', () => {
+    it('returns an object', () => (
+      expect(getPlugins({ plugins: MOCK_PLUGINS }))
+        .to.equal(MOCK_PLUGINS)
     ))
   })
 
@@ -258,6 +323,13 @@ describe('@sequencemedia/eslint-merge/merge', () => {
   describe('`mergeLinterOptions()`', () => {
     it('returns an object', () => (
       expect(mergeLinterOptions({ linterOptions: { mockOption: 'alpha' } }, { linterOptions: { mockOption: 'omega' } }))
+        .to.eql({ mockOption: 'omega' })
+    ))
+  })
+
+  describe('`mergePlugins()`', () => {
+    it('returns an object', () => (
+      expect(mergePlugins({ plugins: { mockOption: 'alpha' } }, { plugins: { mockOption: 'omega' } }))
         .to.eql({ mockOption: 'omega' })
     ))
   })
