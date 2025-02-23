@@ -1,10 +1,10 @@
-import type ESLint from 'eslint'
+import type { Linter } from 'eslint'
 
-type LanguageOptions = ESLint.Linter.LanguageOptions
-type LinterOptions = ESLint.Linter.LinterOptions
-type Processor = ESLint.Linter.Processor
+type LanguageOptions = Linter.LanguageOptions
+type LinterOptions = Linter.LinterOptions
+type Processor = Linter.Processor
 type Plugins = Record<string, unknown> | Record<string, never>
-type Rules = Partial<ESLint.Linter.RulesRecord>
+type Rules = Partial<Linter.RulesRecord>
 type Settings = Record<string, unknown> | Record<string, never>
 
 export namespace LinterConfig {

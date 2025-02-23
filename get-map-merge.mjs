@@ -19,13 +19,13 @@ import merge from './merge.mjs'
  *  ] = flatConfig.map(mapMerge)
  *  ```
  *
- * @param {Record<PropertyKey, unknown>} omega
- * @returns {(alpha: Record<PropertyKey, unknown>) => Record<PropertyKey, unknown> }
+ * @param {Record<string, unknown>} omega
+ * @returns {(alpha: Record<string, unknown>) => Record<string, unknown> }
  */
 export default function getMapMerge (omega) {
   /**
-   * @param {Record<PropertyKey, unknown>} alpha
-   * @returns {Record<PropertyKey, unknown>}
+   * @param {Record<string, unknown>} alpha
+   * @returns {Record<string, unknown>}
    */
   return function mapMerge (alpha) {
     return (

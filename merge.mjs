@@ -1,18 +1,22 @@
 /**
- * @typedef {Record<PropertyKey, unknown> | Record<PropertyKey, never>} ConfigLanguageOptions
- * @typedef {Record<PropertyKey, unknown> | Record<PropertyKey, never>} ConfigLinterOptions
- * @typedef {Record<PropertyKey, unknown> | Record<PropertyKey, never>} ConfigProcessor
- * @typedef {Record<PropertyKey, unknown> | Record<PropertyKey, never>} ConfigPlugins
- * @typedef {Record<PropertyKey, unknown> | Record<PropertyKey, never>} ConfigRules
- * @typedef {Record<PropertyKey, unknown> | Record<PropertyKey, never>} ConfigSettings
+ *  @typedef {import('eslint').Linter} Linter
  *
- * @typedef {Object} Config
- * @property {ConfigLanguageOptions} [languageOptions]
- * @property {ConfigLinterOptions} [linterOptions]
- * @property {ConfigProcessor} [processor]
- * @property {ConfigPlugins} [plugins]
- * @property {ConfigRules} [rules]
- * @property {ConfigSettings} [settings]
+ *  @typedef {Linter.LanguageOptions} LanguageOptions
+ *  @typedef {Linter.LinterOptions} LinterOptions
+ *  @typedef {Linter.Processor} Processor
+ *  @typedef {Record<string, unknown> | Record<string, never>} Plugins
+ *  @typedef {Partial<Linter.RulesRecord>} Rules
+ *  @typedef {Record<string, unknown> | Record<string, never>} Settings
+ *
+ *  @typedef {object} Config
+ *  @property {LanguageOptions} [languageOptions]
+ *  @property {LinterOptions} [linterOptions]
+ *  @property {Processor} [processor]
+ *  @property {Plugins} [plugins]
+ *  @property {Rules} [rules]
+ *  @property {Settings} [settings]
+ *
+ *  @typedef {Record<string, never>} PlainObject
  */
 
 /**
@@ -34,18 +38,34 @@
  *  settings - An object containing name-value pairs of information that should be available to all rules.
  */
 
+/**
+ *  @param {Config} config
+ *  @returns {config is { languageOptions: { parser: Linter.Parser } }}
+ */
 function hasLanguageOptionsParser ({ languageOptions: { parser = null } = {} }) {
   return Boolean(parser)
 }
 
+/**
+ *  @param {Config} config
+ *  @returns {Linter.Parser | PlainObject}
+ */
 function getLanguageOptionsParser ({ languageOptions: { parser = {} } = {} }) {
   return parser
 }
 
+/**
+ * @param {[key: string]} entry
+ * @returns {boolean}
+ */
 function excludeParserByEntriesKey ([key]) {
   return key !== 'parser'
 }
 
+/**
+ *  @param {Config} config
+ *  @returns {Omit<LanguageOptions, 'parser'>}
+ */
 function getLanguageOptionsWithoutParser ({ languageOptions = {} }) {
   const entries = Object.entries(languageOptions)
 
@@ -57,105 +77,105 @@ function getLanguageOptionsWithoutParser ({ languageOptions = {} }) {
 }
 
 /**
- * @param {Config} config
- * @returns {boolean}
+ *  @param {Config} config
+ *  @returns {config is { languageOptions: LanguageOptions }}
  */
 export function hasLanguageOptions ({ languageOptions = null }) {
   return Boolean(languageOptions)
 }
 
 /**
- * @param {Config} config
- * @returns {boolean}
+ *  @param {Config} config
+ *  @returns {config is { linterOptions: LinterOptions }}
  */
 export function hasLinterOptions ({ linterOptions = null }) {
   return Boolean(linterOptions)
 }
 
 /**
- * @param {Config} config
- * @returns {boolean}
+ *  @param {Config} config
+ *  @returns {config is { processor: Processor }}
  */
 export function hasProcessor ({ processor = null }) {
   return Boolean(processor)
 }
 
 /**
- * @param {Config} config
- * @returns {boolean}
+ *  @param {Config} config
+ *  @returns {config is { plugins: Plugins }}
  */
 export function hasPlugins ({ plugins = null }) {
   return Boolean(plugins)
 }
 
 /**
- * @param {Config} config
- * @returns {boolean}
+ *  @param {Config} config
+ *  @returns {config is { rules: Rules }}
  */
 export function hasRules ({ rules = null }) {
   return Boolean(rules)
 }
 
 /**
- * @param {Config} config
- * @returns {boolean}
+ *  @param {Config} config
+ *  @returns {config is { settins: Settings }}
  */
 export function hasSettings ({ settings = null }) {
   return Boolean(settings)
 }
 
 /**
- * @param {Config} config
- * @returns {ConfigLanguageOptions}
+ *  @param {Config} config
+ *  @returns {LanguageOptions | PlainObject}
  */
 export function getLanguageOptions ({ languageOptions = {} }) {
   return languageOptions
 }
 
 /**
- * @param {Config} config
- * @returns {ConfigLinterOptions}
+ *  @param {Config} config
+ *  @returns {LinterOptions}
  */
 export function getLinterOptions ({ linterOptions = {} }) {
   return linterOptions
 }
 
 /**
- * @param {Config} config
- * @returns {ConfigProcessor}
+ *  @param {Config} config
+ *  @returns {Processor | PlainObject}
  */
 export function getProcessor ({ processor = {} }) {
   return processor
 }
 
 /**
- * @param {Config} config
- * @returns {ConfigPlugins}
+ *  @param {Config} config
+ *  @returns {Plugins | PlainObject}
  */
 export function getPlugins ({ plugins = {} }) {
   return plugins
 }
 
 /**
- * @param {Config} config
- * @returns {ConfigRules}
+ *  @param {Config} config
+ *  @returns {Rules | PlainObject}
  */
 export function getRules ({ rules = {} }) {
   return rules
 }
 
 /**
- * @param {Config} config
- * @returns {ConfigSettings}
+ *  @param {Config} config
+ *  @returns {Settings | PlainObject}
  */
 export function getSettings ({ settings = {} }) {
   return settings
 }
 
 /**
- * @param {Config} [alpha]
- * @param {Config} [omega]
- * @returns {ConfigLanguageOptions}
+ *  @param {Config} [alpha]
+ *  @param {Config} [omega]
+ *  @returns {LanguageOptions}
  */
 export function mergeLanguageOptions (alpha = {}, omega = {}) {
   return (
@@ -169,9 +189,9 @@ export function mergeLanguageOptions (alpha = {}, omega = {}) {
 }
 
 /**
- * @param {Config} [alpha]
- * @param {Config} [omega]
- * @returns {ConfigLinterOptions}
+ *  @param {Config} [alpha]
+ *  @param {Config} [omega]
+ *  @returns {LinterOptions}
  */
 export function mergeLinterOptions (alpha = {}, omega = {}) {
   return (
@@ -184,9 +204,9 @@ export function mergeLinterOptions (alpha = {}, omega = {}) {
 }
 
 /**
- * @param {Config} [alpha]
- * @param {Config} [omega]
- * @returns {ConfigRules}
+ *  @param {Config} [alpha]
+ *  @param {Config} [omega]
+ *  @returns {Rules}
  */
 export function mergeProcessor (alpha = {}, omega = {}) {
   /**
@@ -200,9 +220,9 @@ export function mergeProcessor (alpha = {}, omega = {}) {
 }
 
 /**
- * @param {Config} [alpha]
- * @param {Config} [omega]
- * @returns {ConfigRules}
+ *  @param {Config} [alpha]
+ *  @param {Config} [omega]
+ *  @returns {Plugins}
  */
 export function mergePlugins (alpha = {}, omega = {}) {
   /**
@@ -216,9 +236,9 @@ export function mergePlugins (alpha = {}, omega = {}) {
 }
 
 /**
- * @param {Config} [alpha]
- * @param {Config} [omega]
- * @returns {ConfigRules}
+ *  @param {Config} [alpha]
+ *  @param {Config} [omega]
+ *  @returns {Rules}
  */
 export function mergeRules (alpha = {}, omega = {}) {
   return (
@@ -231,9 +251,9 @@ export function mergeRules (alpha = {}, omega = {}) {
 }
 
 /**
- * @param {Config} [alpha]
- * @param {Config} [omega]
- * @returns {ConfigSettings}
+ *  @param {Config} [alpha]
+ *  @param {Config} [omega]
+ *  @returns {Settings}
  */
 export function mergeSettings (alpha = {}, omega = {}) {
   return (
@@ -248,16 +268,9 @@ export function mergeSettings (alpha = {}, omega = {}) {
 /**
  * Merge user config with a flat config element
  *
- * @param {Config} [alpha]
- * @param {Config} [omega]
- * @returns {{
- *  languageOptions?: ConfigLanguageOptions
- *  linterOptions?: ConfigLinterOptions
- *  processor?: ConfigProcessor
- *  plugins?: ConfigPlugins
- *  rules?: ConfigRules
- *  settings?: ConfigSettings
- * }}
+ *  @param {Config} [alpha]
+ *  @param {Config} [omega]
+ *  @returns {Config}
  */
 export default function merge (alpha = {}, omega = {}) {
   return {
