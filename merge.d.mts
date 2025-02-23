@@ -1,53 +1,66 @@
-type ConfigLanguageOptions = Record<PropertyKey, unknown> | Record<PropertyKey, never>
-type ConfigLinterOptions = Record<PropertyKey, unknown> | Record<PropertyKey, never>
-type ConfigProcessor = Record<PropertyKey, unknown> | Record<PropertyKey, never>
-type ConfigPlugins = Record<PropertyKey, unknown> | Record<PropertyKey, never>
-type ConfigRules = Record<PropertyKey, unknown> | Record<PropertyKey, never>
-type ConfigSettings = Record<PropertyKey, unknown> | Record<PropertyKey, never>
+import type ESLint from 'eslint'
 
-type Config = {
-  languageOptions?: ConfigLanguageOptions
-  linterOptions?: ConfigLinterOptions
-  processor?: ConfigProcessor
-  plugins?: ConfigPlugins
-  rules?: ConfigRules
-  settings?: ConfigSettings
+type LanguageOptions = ESLint.Linter.LanguageOptions
+type LinterOptions = ESLint.Linter.LinterOptions
+type Processor = ESLint.Linter.Processor
+type Plugins = Record<string, unknown> | Record<string, never>
+type Rules = Partial<ESLint.Linter.RulesRecord>
+type Settings = Record<string, unknown> | Record<string, never>
+
+export namespace LinterConfig {
+  export {
+     LanguageOptions,
+     LinterOptions,
+     Processor,
+     Plugins,
+     Rules,
+     Settings
+  }
 }
 
-export function hasLanguageOptions (config: Config): config is { languageOptions: ConfigLanguageOptions }
+export type Config = {
+  languageOptions?: LanguageOptions
+  linterOptions?: LinterOptions
+  processor?: Processor
+  plugins?: Plugins
+  rules?: Rules
+  settings?: Settings
+}
 
-export function hasLinterOptions (config: Config): config is { linterOptions: ConfigLinterOptions }
+export function hasLanguageOptions (config: Config): config is { languageOptions: LanguageOptions }
 
-export function hasProcessor (config: Config): config is { processor: ConfigProcessor }
+export function hasLinterOptions (config: Config): config is { linterOptions: LinterOptions }
 
-export function hasPlugins (config: Config): config is { plugins: ConfigPlugins }
+export function hasProcessor (config: Config): config is { processor: Processor }
 
-export function hasRules (config: Config): config is { rules: ConfigRules }
+export function hasPlugins (config: Config): config is { plugins: Plugins }
 
-export function hasSettings (config: Config): config is { settings: ConfigSettings }
+export function hasRules (config: Config): config is { rules: Rules }
 
-export function getLanguageOptions (config: Config): ConfigLanguageOptions | Record<PropertyKey, never>
+export function hasSettings (config: Config): config is { settings: Settings }
 
-export function getLinterOptions (config: Config): ConfigLinterOptions | Record<PropertyKey, never>
+export function getLanguageOptions (config: Config): LanguageOptions | Record<PropertyKey, never>
 
-export function getProcessor (config: Config): ConfigProcessor | Record<PropertyKey, never>
+export function getLinterOptions (config: Config): LinterOptions | Record<PropertyKey, never>
 
-export function getPlugins (config: Config): ConfigPlugins | Record<PropertyKey, never>
+export function getProcessor (config: Config): Processor | Record<PropertyKey, never>
 
-export function getRules (config: Config): ConfigRules | Record<PropertyKey, never>
+export function getPlugins (config: Config): Plugins | Record<PropertyKey, never>
 
-export function getSettings (config: Config): ConfigSettings | Record<PropertyKey, never>
+export function getRules (config: Config): Rules | Record<PropertyKey, never>
 
-export function mergeLanguageOptions (alpha?: Config, omega?: Config): ConfigLanguageOptions
+export function getSettings (config: Config): Settings | Record<PropertyKey, never>
 
-export function mergeLinterOptions (alpha?: Config, omega?: Config): ConfigLinterOptions
+export function mergeLanguageOptions (alpha?: Config, omega?: Config): LanguageOptions
 
-export function mergeProcessor (alpha?: Config, omega?: Config): ConfigRules
+export function mergeLinterOptions (alpha?: Config, omega?: Config): LinterOptions
 
-export function mergePlugins (alpha?: Config, omega?: Config): ConfigRules
+export function mergeProcessor (alpha?: Config, omega?: Config): Processor
 
-export function mergeRules (alpha?: Config, omega?: Config): ConfigRules
+export function mergePlugins (alpha?: Config, omega?: Config): Plugins
 
-export function mergeSettings (alpha?: Config, omega?: Config): ConfigSettings
+export function mergeRules (alpha?: Config, omega?: Config): Rules
+
+export function mergeSettings (alpha?: Config, omega?: Config): Settings
 
 export default function merge (alpha?: Config, omega?: Config): Config
