@@ -32,6 +32,19 @@
  */
 
 /**
+ *  @param {unknown} [v]
+ *  @returns {v is (MergeTypes.Linter.Processor | Record<PropertyKey, string | number | object | boolean | null | string[] | number[] | object[] | boolean[] | null[]> | Record<PropertyKey, never>)}
+ */
+const isObject = (v) => (v || false) instanceof Object && !Array.isArray(v)
+
+/**
+ *
+ * @param {unknown} v
+ * @returns {v is string}
+ */
+const isString = (v) => typeof v === 'string'
+
+/**
  *  @param {Config} config
  *  @returns {config is { languageOptions: { parser: MergeTypes.LanguageOptions.Parser } }}
  */
@@ -135,9 +148,9 @@ export function getLinterOptions ({ linterOptions = {} }) {
 
 /**
  *  @param {Config} config
- *  @returns {Processor | PlainObject}
+ *  @returns {string | Processor | undefined}
  */
-export function getProcessor ({ processor = {} }) {
+export function getProcessor ({ processor }) {
   return processor
 }
 
@@ -199,17 +212,49 @@ export function mergeLinterOptions (alpha = {}, omega = {}) {
 /**
  *  @param {Config} [alpha]
  *  @param {Config} [omega]
- *  @returns {Processor}
+ *  @returns {string | Processor | undefined}
  */
 export function mergeProcessor (alpha = {}, omega = {}) {
   /**
-   *  There may be structures that can't be duplicated in a deep clone with `structuredClone`
-   *  but we just want to override `processor` wholesale so spread a shallow clone
+   *  Deep sigh
    */
-  return {
-    ...getProcessor(alpha),
-    ...getProcessor(omega)
+  const alphaProcessor = getProcessor(alpha)
+  const omegaProcessor = getProcessor(omega)
+
+  if (
+    isObject(alphaProcessor) &&
+    isObject(omegaProcessor)) {
+    return {
+      ...alphaProcessor,
+      ...omegaProcessor
+    }
   }
+
+  if (
+    isObject(alphaProcessor) &&
+    isString(omegaProcessor)) {
+    return (
+      omegaProcessor
+    )
+  }
+
+  if (
+    isString(alphaProcessor) &&
+    isObject(omegaProcessor)) {
+    return {
+      ...omegaProcessor
+    }
+  }
+
+  if (
+    isString(alphaProcessor) &&
+    isString(omegaProcessor)) {
+    return (
+      omegaProcessor
+    )
+  }
+
+  console.log(alphaProcessor, omegaProcessor)
 }
 
 /**

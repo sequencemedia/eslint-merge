@@ -1,15 +1,17 @@
 import type {
+  ESLint as ESLintTypes,
   Linter as LinterTypes
 } from 'eslint'
 
 declare global {
   namespace MergeTypes {
+    type Plugin = ESLintTypes.Plugin
     type Parser = LinterTypes.Parser
 
     type LanguageOptions = LinterTypes.LanguageOptions
     type LinterOptions = LinterTypes.LinterOptions
     type Processor = LinterTypes.Processor
-    type Plugins = Record<string, unknown> | Record<string, never>
+    type Plugins = Record<string, Plugin> // Record<string, unknown> | Record<string, never>
     type Rules = Partial<LinterTypes.RulesRecord>
     type Settings = Record<string, unknown> | Record<string, never>
 
@@ -39,14 +41,7 @@ declare global {
       Settings: Rules
     }
 
-    export type Config = {
-      languageOptions?: LanguageOptions
-      linterOptions?: LinterOptions
-      processor?: Processor
-      plugins?: Plugins
-      rules?: Rules
-      settings?: Settings
-    }
+    export type Config = LinterTypes.Config
   }
 }
 

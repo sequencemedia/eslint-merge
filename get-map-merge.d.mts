@@ -1,3 +1,5 @@
+type Config = MergeTypes.Config
+
 /**
  * Get a map function to merge user config with flat config array elements
  *
@@ -17,4 +19,4 @@
  *  ] = flatConfig.map(mapMerge)
  *  ```
  */
-export default function getMapMerge (omega: Record<string, unknown>): (alpha: Record<string, unknown>) => Record<string, unknown>
+export default function getMapMerge (omega: Config): (alpha: Config) => Config

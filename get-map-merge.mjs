@@ -1,3 +1,7 @@
+/**
+ *  @typedef {MergeTypes.Config} Config
+ */
+
 import merge from './merge.mjs'
 
 /**
@@ -19,13 +23,13 @@ import merge from './merge.mjs'
  *  ] = flatConfig.map(mapMerge)
  *  ```
  *
- * @param {Record<string, unknown>} omega
- * @returns {(alpha: Record<string, unknown>) => Record<string, unknown> }
+ * @param {Config} omega
+ * @returns {(alpha: Config) => Config}
  */
 export default function getMapMerge (omega) {
   /**
-   * @param {Record<string, unknown>} alpha
-   * @returns {Record<string, unknown>}
+   * @param {Config} alpha
+   * @returns {Config}
    */
   return function mapMerge (alpha) {
     return (

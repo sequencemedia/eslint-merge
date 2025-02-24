@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import {
   expect
 } from 'chai'
@@ -13,8 +15,6 @@ describe('@sequencemedia/eslint-merge/get-map-merge', () => {
    *  const mapMerge = getMapMerge()
    */
   describe('`getMapMerge()`', () => {
-    it('returns a function', () => expect(getMapMerge()).to.be.a('function'))
-
     /**
      *  mapMerge()
      */

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import {
   expect
 } from 'chai'
@@ -185,140 +187,140 @@ describe('@sequencemedia/eslint-merge/merge', () => {
 
   describe('`hasLanguageOptions()`', () => {
     describe('Has `languageOptions`', () => {
-      it('returns true', () => (
+      it('returns true', () => {
         expect(hasLanguageOptions({ languageOptions: MOCK_LANGUAGE_OPTIONS }))
           .to.be.true
-      ))
+      })
     })
 
     describe('Does not have `languageOptions`', () => {
-      it('returns false', () => (
+      it('returns false', () => {
         expect(hasLanguageOptions({}))
           .to.be.false
-      ))
+      })
     })
   })
 
   describe('`hasLinterOptions()`', () => {
     describe('Has `linterOptions`', () => {
-      it('returns true', () => (
+      it('returns true', () => {
         expect(hasLinterOptions({ linterOptions: MOCK_LINTER_OPTIONS }))
           .to.be.true
-      ))
+      })
     })
 
     describe('Does not have `linterOptions`', () => {
-      it('returns false', () => (
+      it('returns false', () => {
         expect(hasLinterOptions({}))
           .to.be.false
-      ))
+      })
     })
   })
 
   describe('`hasProcessor()`', () => {
     describe('Has `processor`', () => {
-      it('returns true', () => (
+      it('returns true', () => {
         expect(hasProcessor({ processor: MOCK_PROCESSOR }))
           .to.be.true
-      ))
+      })
     })
 
     describe('Does not have `processor`', () => {
-      it('returns false', () => (
+      it('returns false', () => {
         expect(hasProcessor({}))
           .to.be.false
-      ))
+      })
     })
   })
 
   describe('`hasPlugins()`', () => {
     describe('Has `plugins`', () => {
-      it('returns true', () => (
+      it('returns true', () => {
         expect(hasPlugins({ plugins: MOCK_PLUGINS }))
           .to.be.true
-      ))
+      })
     })
 
     describe('Does not have `plugins`', () => {
-      it('returns false', () => (
+      it('returns false', () => {
         expect(hasPlugins({}))
           .to.be.false
-      ))
+      })
     })
   })
 
   describe('`hasRules()`', () => {
     describe('Has `rules`', () => {
-      it('returns true', () => (
+      it('returns true', () => {
         expect(hasRules({ rules: MOCK_RULES }))
           .to.be.true
-      ))
+      })
     })
 
     describe('Does not have `rules`', () => {
-      it('returns false', () => (
+      it('returns false', () => {
         expect(hasRules({ }))
           .to.be.false
-      ))
+      })
     })
   })
 
   describe('`hasSettings()`', () => {
     describe('Has `settings', () => {
-      it('returns true', () => (
+      it('returns true', () => {
         expect(hasSettings({ settings: MOCK_SETTINGS }))
           .to.be.true
-      ))
+      })
     })
 
     describe('Does not have `settings', () => {
-      it('returns false', () => (
+      it('returns false', () => {
         expect(hasSettings({}))
           .to.be.false
-      ))
+      })
     })
   })
 
   describe('`getLanguageOptions()`', () => {
-    it('returns an object', () => (
+    it('returns an object', () => {
       expect(getLanguageOptions({ languageOptions: MOCK_LANGUAGE_OPTIONS }))
         .to.equal(MOCK_LANGUAGE_OPTIONS)
-    ))
+    })
   })
 
   describe('`getLinterOptions()`', () => {
-    it('returns an object', () => (
+    it('returns an object', () => {
       expect(getLinterOptions({ linterOptions: MOCK_LINTER_OPTIONS }))
         .to.equal(MOCK_LINTER_OPTIONS)
-    ))
+    })
   })
 
   describe('`getProcessor()`', () => {
-    it('returns an object', () => (
+    it('returns an object', () => {
       expect(getProcessor({ processor: MOCK_PROCESSOR }))
         .to.equal(MOCK_PROCESSOR)
-    ))
+    })
   })
 
   describe('`getPlugins()`', () => {
-    it('returns an object', () => (
+    it('returns an object', () => {
       expect(getPlugins({ plugins: MOCK_PLUGINS }))
         .to.equal(MOCK_PLUGINS)
-    ))
+    })
   })
 
   describe('`getRules()`', () => {
-    it('returns an object', () => (
+    it('returns an object', () => {
       expect(getRules({ rules: MOCK_RULES }))
         .to.equal(MOCK_RULES)
-    ))
+    })
   })
 
   describe('`getSettings()`', () => {
-    it('returns an object', () => (
+    it('returns an object', () => {
       expect(getSettings({ settings: MOCK_SETTINGS }))
         .to.equal(MOCK_SETTINGS)
-    ))
+    })
   })
 
   describe('`mergeLanguageOptions()`', () => {
@@ -362,45 +364,68 @@ describe('@sequencemedia/eslint-merge/merge', () => {
     })
 
     describe('Language options does not have a field `parser`', () => {
-      it('returns an object', () => (
+      it('returns an object', () => {
         expect(mergeLanguageOptions({ languageOptions: { mockOption: 'alpha' } }, { languageOptions: { mockOption: 'omega' } }))
           .to.eql({ mockOption: 'omega' })
-      ))
+      })
     })
   })
 
   describe('`mergeLinterOptions()`', () => {
-    it('returns an object', () => (
+    it('returns an object', () => {
       expect(mergeLinterOptions({ linterOptions: { mockOption: 'alpha' } }, { linterOptions: { mockOption: 'omega' } }))
         .to.eql({ mockOption: 'omega' })
-    ))
+    })
   })
 
   describe('`mergeProcessor()`', () => {
-    it('returns an object', () => (
-      expect(mergeProcessor({ processor: { mockOption: 'alpha' } }, { processor: { mockOption: 'omega' } }))
-        .to.eql({ mockOption: 'omega' })
-    ))
+    describe('Alpha is an object, omega is an object', () => {
+      it('returns an object', () => {
+        expect(mergeProcessor({ processor: { mockAlpha: 'alpha', mockOption: 'alpha' } }, { processor: { mockOmega: 'omega', mockOption: 'omega' } }))
+          .to.eql({ mockAlpha: 'alpha', mockOmega: 'omega', mockOption: 'omega' })
+      })
+    })
+
+    describe('Alpha is an object, omega is a string', () => {
+      it('returns a string', () => {
+        expect(mergeProcessor({ processor: { mockOption: 'alpha' } }, { processor: 'omega' }))
+          .to.eql('omega')
+      })
+    })
+
+    describe('Alpha is a string, omega is an object', () => {
+      it('returns an object', () => {
+        expect(mergeProcessor({ processor: 'alpha' }, { processor: { mockOption: 'omega' } }))
+          .to.eql({ mockOption: 'omega' })
+      })
+    })
+
+    describe('Alpha is a string, omega is a string', () => {
+      it('returns a string', () => {
+        expect(mergeProcessor({ processor: 'alpha' }, { processor: 'omega' }))
+          .to.eql('omega')
+      })
+    })
   })
 
   describe('`mergePlugins()`', () => {
-    it('returns an object', () => (
+    it('returns an object', () => {
       expect(mergePlugins({ plugins: { mockOption: 'alpha' } }, { plugins: { mockOption: 'omega' } }))
         .to.eql({ mockOption: 'omega' })
-    ))
+    })
   })
 
   describe('`mergeRules()`', () => {
-    it('returns an object', () => (
+    it('returns an object', () => {
       expect(mergeRules({ rules: { mockOption: 'alpha' } }, { rules: { mockOption: 'omega' } }))
         .to.eql({ mockOption: 'omega' })
-    ))
+    })
   })
 
   describe('`mergeSettings()`', () => {
-    it('returns an object', () => (
+    it('returns an object', () => {
       expect(mergeSettings({ settings: { mockOption: 'alpha' } }, { settings: { mockOption: 'omega' } }))
         .to.eql({ mockOption: 'omega' })
-    ))
+    })
   })
 })

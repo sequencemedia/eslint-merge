@@ -1,5 +1,4 @@
 
-
 type Linter = MergeTypes.Linter
 type Config = MergeTypes.Config
 
