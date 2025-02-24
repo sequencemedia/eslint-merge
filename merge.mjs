@@ -1,20 +1,13 @@
 /**
- *  @typedef {import('eslint').Linter} Linter
+ *  @typedef {MergeTypes.Linter} Linter
+ *  @typedef {MergeTypes.Config} Config
  *
- *  @typedef {Linter.LanguageOptions} LanguageOptions
- *  @typedef {Linter.LinterOptions} LinterOptions
- *  @typedef {Linter.Processor} Processor
- *  @typedef {Record<string, unknown> | Record<string, never>} Plugins
- *  @typedef {Partial<Linter.RulesRecord>} Rules
- *  @typedef {Record<string, unknown> | Record<string, never>} Settings
- *
- *  @typedef {object} Config
- *  @property {LanguageOptions} [languageOptions]
- *  @property {LinterOptions} [linterOptions]
- *  @property {Processor} [processor]
- *  @property {Plugins} [plugins]
- *  @property {Rules} [rules]
- *  @property {Settings} [settings]
+ *  @typedef {MergeTypes.Linter.LanguageOptions} LanguageOptions
+ *  @typedef {MergeTypes.Linter.LinterOptions} LinterOptions
+ *  @typedef {MergeTypes.Linter.Processor} Processor
+ *  @typedef {MergeTypes.Linter.Plugins} Plugins
+ *  @typedef {MergeTypes.Linter.Rules} Rules
+ *  @typedef {MergeTypes.Linter.Settings} Settings
  *
  *  @typedef {Record<string, never>} PlainObject
  */
@@ -40,22 +33,22 @@
 
 /**
  *  @param {Config} config
- *  @returns {config is { languageOptions: { parser: Linter.Parser } }}
+ *  @returns {config is { languageOptions: { parser: MergeTypes.LanguageOptions.Parser } }}
  */
-function hasLanguageOptionsParser ({ languageOptions: { parser = null } = {} }) {
+function hasLanguageOptionsParser ({ languageOptions: { parser } = {} }) {
   return Boolean(parser)
 }
 
 /**
  *  @param {Config} config
- *  @returns {Linter.Parser | PlainObject}
+ *  @returns {MergeTypes.LanguageOptions.Parser | undefined}
  */
-function getLanguageOptionsParser ({ languageOptions: { parser = {} } = {} }) {
+function getLanguageOptionsParser ({ languageOptions: { parser } = {} }) {
   return parser
 }
 
 /**
- * @param {[key: string]} entry
+ * @param {[key: string, value: unknown]} entry
  * @returns {boolean}
  */
 function excludeParserByEntriesKey ([key]) {
@@ -80,7 +73,7 @@ function getLanguageOptionsWithoutParser ({ languageOptions = {} }) {
  *  @param {Config} config
  *  @returns {config is { languageOptions: LanguageOptions }}
  */
-export function hasLanguageOptions ({ languageOptions = null }) {
+export function hasLanguageOptions ({ languageOptions }) {
   return Boolean(languageOptions)
 }
 
@@ -88,7 +81,7 @@ export function hasLanguageOptions ({ languageOptions = null }) {
  *  @param {Config} config
  *  @returns {config is { linterOptions: LinterOptions }}
  */
-export function hasLinterOptions ({ linterOptions = null }) {
+export function hasLinterOptions ({ linterOptions }) {
   return Boolean(linterOptions)
 }
 
@@ -96,7 +89,7 @@ export function hasLinterOptions ({ linterOptions = null }) {
  *  @param {Config} config
  *  @returns {config is { processor: Processor }}
  */
-export function hasProcessor ({ processor = null }) {
+export function hasProcessor ({ processor }) {
   return Boolean(processor)
 }
 
@@ -104,7 +97,7 @@ export function hasProcessor ({ processor = null }) {
  *  @param {Config} config
  *  @returns {config is { plugins: Plugins }}
  */
-export function hasPlugins ({ plugins = null }) {
+export function hasPlugins ({ plugins }) {
   return Boolean(plugins)
 }
 
@@ -112,15 +105,15 @@ export function hasPlugins ({ plugins = null }) {
  *  @param {Config} config
  *  @returns {config is { rules: Rules }}
  */
-export function hasRules ({ rules = null }) {
+export function hasRules ({ rules }) {
   return Boolean(rules)
 }
 
 /**
  *  @param {Config} config
- *  @returns {config is { settins: Settings }}
+ *  @returns {config is { settings: Settings }}
  */
-export function hasSettings ({ settings = null }) {
+export function hasSettings ({ settings }) {
   return Boolean(settings)
 }
 
@@ -206,7 +199,7 @@ export function mergeLinterOptions (alpha = {}, omega = {}) {
 /**
  *  @param {Config} [alpha]
  *  @param {Config} [omega]
- *  @returns {Rules}
+ *  @returns {Processor}
  */
 export function mergeProcessor (alpha = {}, omega = {}) {
   /**
@@ -266,7 +259,7 @@ export function mergeSettings (alpha = {}, omega = {}) {
 }
 
 /**
- * Merge user config with a flat config element
+ *  Merge user config with a flat config element
  *
  *  @param {Config} [alpha]
  *  @param {Config} [omega]

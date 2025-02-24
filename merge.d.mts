@@ -1,30 +1,18 @@
-import type { Linter } from 'eslint'
 
-type LanguageOptions = Linter.LanguageOptions
-type LinterOptions = Linter.LinterOptions
-type Processor = Linter.Processor
-type Plugins = Record<string, unknown> | Record<string, never>
-type Rules = Partial<Linter.RulesRecord>
-type Settings = Record<string, unknown> | Record<string, never>
 
-export namespace LinterConfig {
-  export {
-     LanguageOptions,
-     LinterOptions,
-     Processor,
-     Plugins,
-     Rules,
-     Settings
-  }
-}
+type Linter = MergeTypes.Linter
+type Config = MergeTypes.Config
 
-export type Config = {
-  languageOptions?: LanguageOptions
-  linterOptions?: LinterOptions
-  processor?: Processor
-  plugins?: Plugins
-  rules?: Rules
-  settings?: Settings
+type LanguageOptions = MergeTypes.Linter.LanguageOptions
+type LinterOptions = MergeTypes.Linter.LinterOptions
+type Processor = MergeTypes.Linter.Processor
+type Plugins = MergeTypes.Linter.Plugins
+type Rules = MergeTypes.Linter.Rules
+type Settings = MergeTypes.Linter.Settings
+
+export type {
+  Linter,
+  Config
 }
 
 export function hasLanguageOptions (config: Config): config is { languageOptions: LanguageOptions }
