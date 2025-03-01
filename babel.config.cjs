@@ -28,6 +28,7 @@ const presets = [
   ]
 ]
 
+// @ts-expect-error Babel API
 module.exports = (api) => {
   if (api) api.cache.using(env)
 

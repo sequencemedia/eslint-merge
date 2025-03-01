@@ -29,6 +29,7 @@
     "@babel/eslint-parser": "^7.26.8",
     "@babel/preset-env": "^7.26.9",
     "@types/chai": "^5.0.1",
+    "@types/debug": "^4.1.12",
     "@types/eslint": "^9.6.1",
     "@types/mocha": "^10.0.10",
     "chai": "^5.2.0",
