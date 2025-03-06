@@ -1,6 +1,6 @@
 {
   "name": "@sequencemedia/eslint-merge",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "Merge configurations for ESLint 9",
   "main": "./index.mjs",
   "type": "module",
