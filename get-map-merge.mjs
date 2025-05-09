@@ -5,7 +5,7 @@
 import merge from './merge.mjs'
 
 /**
- * Get a map function to merge user config with flat config array elements
+ *  Get a map function to merge user config with flat config array elements
  *
  *  ```
  *  const flatConfig = [
@@ -23,13 +23,13 @@ import merge from './merge.mjs'
  *  ] = flatConfig.map(mapMerge)
  *  ```
  *
- * @param {Config} omega
- * @returns {(alpha: Config) => Config}
+ *  @param {Config} omega
+ *  @returns {(alpha: Config) => Config}
  */
 export default function getMapMerge (omega) {
   /**
-   * @param {Config} alpha
-   * @returns {Config}
+   *  @param {Config} alpha
+   *  @returns {Config}
    */
   return function mapMerge (alpha) {
     return (

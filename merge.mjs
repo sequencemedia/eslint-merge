@@ -38,9 +38,8 @@
 const isObject = (v) => (v || false) instanceof Object && !Array.isArray(v)
 
 /**
- *
- * @param {unknown} v
- * @returns {v is string}
+ *  @param {unknown} v
+ *  @returns {v is string}
  */
 const isString = (v) => typeof v === 'string'
 
@@ -61,8 +60,8 @@ function getLanguageOptionsParser ({ languageOptions: { parser } = {} }) {
 }
 
 /**
- * @param {[key: string, value: unknown]} entry
- * @returns {boolean}
+ *  @param {[key: string, value: unknown]} entry
+ *  @returns {boolean}
  */
 function excludeParserByEntriesKey ([key]) {
   return key !== 'parser'

@@ -1,7 +1,7 @@
 type Config = MergeTypes.Config
 
 /**
- * Get a map function to merge user config with flat config array elements
+ *  Get a map function to merge user config with flat config array elements
  *
  *  ```
  *  const flatConfig = [
