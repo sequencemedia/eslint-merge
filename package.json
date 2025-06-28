@@ -25,14 +25,14 @@
     "test": "mocha test --recursive --verbose --color"
   },
   "devDependencies": {
-    "@babel/core": "^7.27.4",
+    "@babel/core": "^7.27.7",
     "@babel/eslint-parser": "^7.27.5",
     "@babel/preset-env": "^7.27.2",
     "@types/chai": "^5.2.2",
     "@types/debug": "^4.1.12",
     "@types/eslint": "^9.6.1",
     "@types/mocha": "^10.0.10",
-    "@types/node": "^24.0.4",
+    "@types/node": "^24.0.6",
     "chai": "^5.2.0",
     "core-js": "^3.43.0",
     "eslint": "8.57.1",
