@@ -34,7 +34,7 @@
     "@types/mocha": "^10.0.10",
     "@types/node": "^24.0.10",
     "chai": "^5.2.0",
-    "core-js": "^3.43.0",
+    "core-js": "^3.44.0",
     "eslint": "8.57.1",
     "eslint-config-standard": "^17.1.0",
     "husky": "^9.1.7",
