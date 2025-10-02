@@ -32,13 +32,13 @@
     "@types/debug": "^4.1.12",
     "@types/eslint": "^9.6.1",
     "@types/mocha": "^10.0.10",
-    "@types/node": "^24.6.0",
+    "@types/node": "^24.6.2",
     "chai": "^6.2.0",
     "core-js": "^3.45.1",
     "eslint": "8.57.1",
     "eslint-config-standard": "^17.1.0",
     "husky": "^9.1.7",
-    "mocha": "^11.7.3"
+    "mocha": "^11.7.4"
   },
   "imports": {
     "#eslint-merge": "./index.mjs",
