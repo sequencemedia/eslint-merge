@@ -27,7 +27,7 @@
   "devDependencies": {
     "@babel/core": "^7.29.0",
     "@babel/eslint-parser": "^7.28.6",
-    "@babel/preset-env": "^7.29.2",
+    "@babel/preset-env": "^7.29.3",
     "@types/chai": "^5.2.3",
     "@types/debug": "^4.1.13",
     "@types/eslint": "^9.6.1",
