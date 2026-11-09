@@ -49,5 +49,8 @@
     ".": "./index.mjs",
     "./get-map-merge": "./get-map-merge.mjs",
     "./merge": "./merge.mjs"
+  },
+  "allowScripts": {
+    "core-js@3.51.0": true
   }
 }
